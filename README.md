@@ -16,7 +16,7 @@ This plugin enables direct per-key canvas lighting control and custom color mode
 
 1. Download the [`Royal Kludge RK M87.js`](./Royal%20Kludge%20RK%20M87.js) file from this repository.
 2. Copy the file into your SignalRGB Plugins directory. Typically this is located at:
-   `%userprofile%\Documents\SignalRGB\Plugins`
+   `%userprofile%\Documents\WhirlwindFX\Plugins`
 3. Restart **SignalRGB**.
 4. The keyboard should be auto-detected by SignalRGB!
 
