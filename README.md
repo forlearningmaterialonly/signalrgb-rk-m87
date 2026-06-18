@@ -20,6 +20,17 @@ This plugin enables direct per-key canvas lighting control and custom color mode
 3. Restart **SignalRGB**.
 4. The keyboard should be auto-detected by SignalRGB!
 
+## Protocol Notes
+
+A sanitized USB capture ([`m87_protocol_sanitized.pcapng`](./m87_protocol_sanitized.pcapng)) is included in this repo — it contains only the M87's vendor control interface traffic (no keystrokes or other devices), just the lighting protocol.
+
+**Heads-up for auto-detection:** the M87 (`258A:01A2`) does *not* use the report-6 stream that the other `01xx` RK boards use. Live per-key color goes through HID feature report `0x09` on the vendor command collection (interface 1, usage `0x0002`, usage_page `0xff02`), 520-byte reports:
+
+- **Mode-entry prelude:** `0x0b` (session) → `0x84` (enter) → `0x04` (effect config).
+- **Subcommand `0x08`** = live stream, **`0x06`** = static profile write (chokes if streamed).
+- **Per-key layout:** 8-byte header `09 08 00 00 01 00 7a 01`, then 3 bytes/LED at `8 + index*3`, where `index = col*6 + row`.
+- It also conflicts with RK's `DeviceDriver.exe`.
+
 ## Support & Details
 - **Vendor ID**: `0x258A`
 - **Product ID**: `0x01A2`
